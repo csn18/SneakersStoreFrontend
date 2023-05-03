@@ -2,18 +2,14 @@ import React from 'react';
 import './Cart.css'
 import {removeProductFromCart} from "../../store/Reducers/cartReducer";
 import {useDispatch} from "react-redux";
-import axios from "axios";
+import CartService from '../../API/CartService'
 
 function CartItem(props) {
     const dispatch = useDispatch();
 
-    const removeCartElement = () => {
+    async function removeCartElement() {
+        await CartService.deleteProductCart(props.id);
         dispatch(removeProductFromCart(props));
-        axios.delete(`http://localhost:8000/api/user/cart/item/${props.id}/`, {
-            headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
-        }).then((response) => {
-            console.log(response)
-        })
     }
 
     return (

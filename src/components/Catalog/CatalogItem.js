@@ -2,21 +2,14 @@ import React from 'react';
 import './Catalog.css'
 import {useDispatch} from "react-redux";
 import {addProductToCart, addProductToFavorite} from "../../store/Reducers/cartReducer";
-import axios from "axios";
+import CartService from "../../API/CartService";
 
 const CatalogItem = (props) => {
     const dispatch = useDispatch();
 
-    const addToCart = () => {
+    async function addToCart() {
+        await CartService.addProductCart({itemId: props.id});
         dispatch(addProductToCart(props));
-        const data = {
-            itemId: props.id
-        }
-        axios.post('http://localhost:8000/api/user/cart/', data, {
-            headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
-        }).then((response) => {
-            console.log(response)
-        })
     }
 
     const addToFavorites = () => {

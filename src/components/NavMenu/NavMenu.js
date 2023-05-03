@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './NavMenu.css'
 import {
     isOpen,
@@ -8,32 +8,13 @@ import {
     openModalSignUp
 } from "../../store/Reducers/moladReducer";
 import {useDispatch, useSelector} from "react-redux";
-import axios from "axios";
-import {setEmail, setFirstName} from "../../store/Reducers/userReducer";
-import {appendProductsFromDataBase} from "../../store/Reducers/cartReducer";
 
 
 function NavMenu(props) {
     const dispatch = useDispatch();
     const totalCostCart = useSelector((state) => state.cart.totalCostCart);
     const countFavoriteItems = useSelector((state) => state.cart.countFavoriteItems);
-
     const userEmail = useSelector((state) => state.user.userEmail);
-
-    axios.get('http://localhost:8000/api/user/profile/', {
-        headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
-    }).then((response) => {
-        dispatch(setEmail(response.data.username));
-        dispatch(setFirstName(response.data.first_name));
-    })
-
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/user/cart/', {
-            headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
-        }).then((response) => {
-            dispatch(appendProductsFromDataBase(response.data.shop_items))
-        })
-    }, [dispatch])
 
     const openModalWindowCart = () => {
         dispatch(openModalCart(true));
