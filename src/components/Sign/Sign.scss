@@ -1,0 +1,66 @@
+.sign-form {
+  width: 70%;
+  margin: auto;
+
+  & input:not([type=submit]) {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid #d6d6d6;
+    outline: none;
+    padding: 1rem;
+    font-size: 1.2em;
+    transition: all .3s;
+
+    &[aria-invalid=true] {
+      border-width: 1px 1px 1px 10px;
+      border-style: solid;
+      border-color: rgb(191, 22, 80) rgb(191, 22, 80) rgb(191, 22, 80) rgb(236, 89, 144);
+      border-image: initial;
+      background: rgb(251, 236, 242);
+    }
+  }
+}
+
+.sign-form__input-wrapper {
+  margin-bottom: 1rem;
+
+  & p {
+    margin-top: .5rem;
+    text-align: left;
+    color: #d13232;
+  }
+}
+
+.sign-form__submit-button {
+  background-color: #e5e1ff;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  font-size: 1em;
+  border-radius: .5rem;
+  width: 40%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d4ceff;
+  }
+}
+
+.sign-form__more-action {
+  margin-bottom: 1rem;
+  font-size: 1em;
+  color: #414141;
+  cursor: pointer;
+
+  & button {
+    background: none;
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    color: #8f87d1;
+    font-size: 1em;
+    margin-left: .5rem;
+    cursor: pointer;
+    font-weight: 500;
+  }
+}

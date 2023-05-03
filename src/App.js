@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import NavMenu from './components/NavMenu/NavMenu'
+import Catalog from './components/Catalog/Catalog'
+import ModalCart from './components/Molad/ModalCart'
+import ModalWindow from "./components/Molad/ModalWindow";
+import ModalFavorites from "./components/Molad/ModalFavorites";
+import {useSelector} from "react-redux";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const openModalCart = useSelector((state) => state.modal.openModalCart);
+    const openModalFavorite = useSelector((state) => state.modal.openModalFavorite);
+
+    return (
+        <div className="App">
+            <NavMenu/>
+            <Catalog/>
+            <ModalWindow>
+
+            </ModalWindow>
+        </div>
+    );
 }
 
 export default App;
