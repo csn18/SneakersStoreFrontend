@@ -11,6 +11,7 @@ const ADD_PRODUCT_TO_TO_CART_FAVORITE = 'ADD_PRODUCT_TO_TO_CART_FAVORITE'
 const REMOVE_PRODUCT_FROM_FAVORITE = 'REMOVE_PRODUCT_FROM_FAVORITE'
 const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART'
 const APPEND_PRODUCTS_DB = 'APPEND_PRODUCTS_DB'
+const APPEND_FAVORITES_DB = 'APPEND_FAVORITES_DB'
 
 export const cartReducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -27,6 +28,12 @@ export const cartReducer = (state = defaultState, action) => {
                 ...state,
                 totalCostCart: state.totalCostCart + Number(action.payload.price),
                 cartItems: [...state.cartItems, action.payload]
+            }
+        case APPEND_FAVORITES_DB:
+            return {
+                ...state,
+                countFavoriteItems: action.payload.length,
+                favoriteItems: [...state.favoriteItems, ...action.payload]
             }
         case ADD_PRODUCT_TO_FAVORITE:
             return {
@@ -67,3 +74,4 @@ export const removeProductFromCart = (payload) => ({type: 'REMOVE_PRODUCT_FROM_C
 export const removeProductFromFavorite = (payload) => ({type: 'REMOVE_PRODUCT_FROM_FAVORITE', payload});
 export const addProductToCartFavorite = (payload) => ({type: 'ADD_PRODUCT_TO_TO_CART_FAVORITE', payload});
 export const appendProductsFromDataBase = (payload) => ({type: 'APPEND_PRODUCTS_DB', payload});
+export const appendFavoritesFromDataBase = (payload) => ({type: 'APPEND_FAVORITES_DB', payload});

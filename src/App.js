@@ -4,10 +4,14 @@ import Catalog from './components/Catalog/Catalog'
 import ModalWindow from "./components/Molad/ModalWindow";
 import {useEffect} from "react";
 import CartService from "./API/CartService";
-import {appendProductsFromDataBase} from "./store/Reducers/cartReducer";
+import {
+    appendFavoritesFromDataBase,
+    appendProductsFromDataBase
+} from "./store/Reducers/cartReducer";
 import {useDispatch} from "react-redux";
 import UserService from "./API/UserService";
 import {setEmail, setFirstName} from "./store/Reducers/userReducer";
+import FavoriteService from "./API/FavoriteService";
 
 function App() {
     const dispatch = useDispatch();
@@ -17,7 +21,11 @@ function App() {
     }, [])
 
     useEffect(() => {
-        fetchUserProfile()
+        fetchUserProfile();
+    }, [])
+
+    useEffect(() => {
+        fetchFavoritesProducts();
     }, [])
 
     async function fetchCartProducts() {
@@ -29,6 +37,11 @@ function App() {
         const response = await UserService.GetUserProfile();
         dispatch(setEmail(response.data['username']));
         dispatch(setFirstName(response.data['first_name']));
+    }
+
+    async function fetchFavoritesProducts() {
+        const response = await FavoriteService.getProductFavorite();
+        dispatch(appendFavoritesFromDataBase(response.data['shop_items']))
     }
 
     return (

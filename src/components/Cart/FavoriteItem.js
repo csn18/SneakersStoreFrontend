@@ -1,16 +1,20 @@
 import React from 'react';
 import {removeProductFromFavorite, addProductToCartFavorite} from "../../store/Reducers/cartReducer";
 import {useDispatch} from "react-redux";
+import CartService from "../../API/CartService";
+import FavoriteService from "../../API/FavoriteService";
 
 function FavoriteItem(props) {
     const dispatch = useDispatch();
 
-    const removeFavoriteElement = () => {
-        dispatch(removeProductFromFavorite(props))
+    async function removeFavoriteElement() {
+        await FavoriteService.deleteProductFavorite(props.id);
+        dispatch(removeProductFromFavorite(props));
     }
 
-    const addProductToCartFromFavorite = () => {
-        dispatch(addProductToCartFavorite(props))
+    async function addProductToCartFromFavorite() {
+        await CartService.addProductCart({itemId: props.id});
+        dispatch(addProductToCartFavorite(props));
     }
 
 
