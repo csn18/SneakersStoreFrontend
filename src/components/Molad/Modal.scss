@@ -21,7 +21,6 @@
 
 .model-content {
   width: 50rem;
-  min-height: 20rem;
   border-radius: 1rem;
   background-color: white;
   position: fixed;
@@ -66,7 +65,7 @@
 }
 
 .modal-content {
-  padding: 2rem;
+  padding: 2rem 2rem 3rem 2rem;
 }
 
 .modal-content hr {
@@ -83,4 +82,15 @@
 .modal-header {
   margin-bottom: 2rem;
   font-weight: 600;
+}
+
+.not-auth__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+
+  & button {
+    margin-bottom: 1rem;
+  }
 }

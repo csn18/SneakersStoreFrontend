@@ -4,45 +4,42 @@ import React, {useEffect} from 'react';
 import CatalogItem from "./CatalogItem";
 import {useDispatch, useSelector} from "react-redux";
 import {saveAllProductsAction} from "../../store/Reducers/shopItemsReducer";
-import {isOpen, openModalSignIn} from "../../store/Reducers/moladReducer";
+import {CardLoader} from "../SkeletonLoader/CardListLoader";
 
 function Catalog(props) {
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.products.productList);
-    const userEmail = useSelector((state) => state.user.userEmail);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/items/', {
-            headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
-        })
-            .then((response) => {
-                dispatch(saveAllProductsAction(response.data));
-            })
+        setTimeout(() => {
+            axios.get('http://localhost:8000/api/items/')
+                .then((response) => {
+                    dispatch(saveAllProductsAction(response.data));
+                })
+        }, 1500)
     }, [dispatch])
-
-    const openModalWindowSignIn = () => {
-        dispatch(openModalSignIn(true));
-        dispatch(isOpen(true));
-    }
 
     return (
         <div className='catalog'>
             {
-                !userEmail
-                    ? <div className="container catalog-container catalog-hidden">
-                        <h2>Войдите в свой личный кабинет</h2>
-                        <button className='nav-link__btn' onClick={openModalWindowSignIn}>
-                            Войти
-                        </button>
-                    </div>
-                    : <div className="container catalog-container ">
-                        <h2>Список товаров</h2>
-                        <div className="catalog-list">
-                            {
-                                productList[0]?.map(element => <CatalogItem key={element.id} {...element}/>)
-                            }
-                        </div>
-                    </div>
+                <div className="container catalog-container">
+                    <h2>Главная страница</h2>
+                    {
+                        productList[0]
+                            ?
+                            <div className="catalog-list">
+                                {productList[0]?.map(element => <CatalogItem key={element.id} {...element}/>)}
+                            </div>
+                            :
+                            <div className='catalog-list__loader'>
+                                <CardLoader/>
+                                <CardLoader/>
+                                <CardLoader/>
+                                <CardLoader/>
+                                <CardLoader/>
+                            </div>
+                    }
+                </div>
             }
         </div>
     );

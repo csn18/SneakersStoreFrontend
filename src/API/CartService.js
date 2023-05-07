@@ -2,9 +2,12 @@ import axios from "axios";
 
 export default class CartService {
     static async getAllProductsCart() {
-        return await axios.get('http://localhost:8000/api/user/cart/', {
-            headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
-        });
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken) {
+            return await axios.get('http://localhost:8000/api/user/cart/', {
+                headers: {Authorization: `Bearer ${accessToken}`}
+            });
+        }
     };
 
     static async deleteProductCart(productId) {

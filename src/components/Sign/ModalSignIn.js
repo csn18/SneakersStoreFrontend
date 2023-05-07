@@ -2,13 +2,12 @@ import React from 'react';
 import './Sign.css'
 import {useForm} from 'react-hook-form';
 import {closeModal, isOpen, openModalSignUp} from "../../store/Reducers/moladReducer";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {loginUser} from "./RequestBackend";
 import {setPassword} from "../../store/Reducers/userReducer";
 
 function ModalSignIn(props) {
     const dispatch = useDispatch();
-    const userPassword = useSelector((state) => state.user.userPassword);
 
     const openModalWindowSignUp = () => {
         dispatch(closeModal(true));

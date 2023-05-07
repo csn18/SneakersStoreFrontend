@@ -6,6 +6,7 @@ import ModalCart from "./ModalCart";
 import ModalSignIn from "../Sign/ModalSignIn";
 import ModalSignUp from "../Sign/ModalSignUp";
 import ModalAccount from "../Sign/ModalAccount";
+import {ModalNotAuth} from "./ModalNotAuth";
 
 function ModalWindow({children}) {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function ModalWindow({children}) {
     const openModalSignIn = useSelector((state) => state.modal.openModalSignIn);
     const openModalSignUp = useSelector((state) => state.modal.openModalSignUp);
     const openModalProfile = useSelector((state) => state.modal.openModalProfile);
+    const openModalNotAuth = useSelector((state) => state.modal.openModalNotAuth);
 
     const closeModalOutside = () => {
         dispatch(closeModal(true));
@@ -58,6 +60,9 @@ function ModalWindow({children}) {
                             }
                             {
                                 openModalProfile ? <ModalAccount/> : null
+                            }
+                            {
+                                openModalNotAuth ? <ModalNotAuth/> : null
                             }
                         </div>
                     </div>

@@ -1,8 +1,8 @@
 const defaultState = {
     favoriteItems: [],
     cartItems: [],
-    totalCostCart: 0,
-    countFavoriteItems: 0
+    totalCostCart: null,
+    countFavoriteItems: null
 }
 
 const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'

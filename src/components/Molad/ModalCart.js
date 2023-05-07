@@ -21,7 +21,7 @@ function ModalCart(props) {
                         <hr/>
                         <div className="cart-items__list">
                             {
-                                cartList?.map(element => <CartItem {...element}/>)
+                                cartList?.map(element => <CartItem key={element.id} {...element}/>)
                             }
                         </div>
                     </div>

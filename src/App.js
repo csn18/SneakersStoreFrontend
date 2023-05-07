@@ -17,7 +17,9 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchCartProducts();
+        setTimeout(() => {
+            fetchCartProducts();
+        }, 1500)
     }, [])
 
     useEffect(() => {
@@ -25,23 +27,31 @@ function App() {
     }, [])
 
     useEffect(() => {
-        fetchFavoritesProducts();
+        setTimeout(() => {
+            fetchFavoritesProducts();
+        }, 1500)
     }, [])
 
     async function fetchCartProducts() {
         const response = await CartService.getAllProductsCart();
-        dispatch(appendProductsFromDataBase(response.data['shop_items']))
+        if (response) {
+            dispatch(appendProductsFromDataBase(response.data['shop_items']));
+        }
     }
 
     async function fetchUserProfile() {
         const response = await UserService.GetUserProfile();
-        dispatch(setEmail(response.data['username']));
-        dispatch(setFirstName(response.data['first_name']));
+        if (response) {
+            dispatch(setEmail(response.data['username']));
+            dispatch(setFirstName(response.data['first_name']));
+        }
     }
 
     async function fetchFavoritesProducts() {
         const response = await FavoriteService.getProductFavorite();
-        dispatch(appendFavoritesFromDataBase(response.data['shop_items']))
+        if (response) {
+            dispatch(appendFavoritesFromDataBase(response.data['shop_items']));
+        }
     }
 
     return (

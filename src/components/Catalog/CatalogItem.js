@@ -1,18 +1,25 @@
 import React from 'react';
 import './Catalog.css'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     addProductToCart,
     addProductToFavorite
 } from "../../store/Reducers/cartReducer";
 import CartService from "../../API/CartService";
 import FavoriteService from "../../API/FavoriteService";
+import {isOpen, openModalNotAuth} from "../../store/Reducers/moladReducer";
 
 const CatalogItem = (props) => {
     const dispatch = useDispatch();
+    const userEmail = useSelector((state) => state.user.userEmail);
 
     async function addToCart() {
-        await CartService.addProductCart({itemId: props.id});
+        if (userEmail) {
+            await CartService.addProductCart({itemId: props.id});
+        } else {
+            dispatch(openModalNotAuth(true));
+            dispatch(isOpen(true));
+        }
         dispatch(addProductToCart(props));
     }
 

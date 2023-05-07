@@ -17,7 +17,7 @@ function ModalFavorites(props) {
                         <hr className='favorite-modal__hr'/>
                         <div className="favorite-items__list">
                             {
-                                favoriteList?.map(element => <FavoriteItem {...element}/>)
+                                favoriteList?.map(element => <FavoriteItem key={element.id} {...element}/>)
                             }
                         </div>
                     </div>
