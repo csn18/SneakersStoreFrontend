@@ -21,6 +21,7 @@
 
 .model-content {
   width: 50rem;
+  min-height: 53rem;
   border-radius: 1rem;
   background-color: white;
   position: fixed;
@@ -70,6 +71,7 @@
 
 .modal-content hr {
   margin-top: 2rem;
+  margin-bottom: 1rem;
   background-color: #e8e8e8;
   border: none;
   height: 1px;

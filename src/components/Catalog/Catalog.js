@@ -25,10 +25,10 @@ function Catalog(props) {
                 <div className="container catalog-container">
                     <h2>Главная страница</h2>
                     {
-                        productList[0]
+                        productList.length > 0
                             ?
                             <div className="catalog-list">
-                                {productList[0]?.map(element => <CatalogItem key={element.id} {...element}/>)}
+                                {productList?.map(element => <CatalogItem key={element.id} {...element}/>)}
                             </div>
                             :
                             <div className='catalog-list__loader'>

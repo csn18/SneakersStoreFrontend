@@ -21,4 +21,10 @@ export default class CartService {
             headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
         });
     };
+
+    static async firstLoad() {
+        return await axios.get('http://localhost:8000/api/first-load/', {
+            headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
+        });
+    }
 };

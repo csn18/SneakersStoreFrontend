@@ -2,9 +2,11 @@ import React from 'react';
 import './Modal.css'
 import {useSelector} from "react-redux";
 import CartItem from "../Cart/CartItem";
+import {ProductCartLoader} from "../SkeletonLoader/ProductCartLoader";
 
 function ModalCart(props) {
     const cartList = useSelector((state) => state.cart.cartItems);
+    const loadedCartItems = useSelector((state) => state.cart.loadedCartItems);
 
     return (
         <div>
@@ -21,7 +23,15 @@ function ModalCart(props) {
                         <hr/>
                         <div className="cart-items__list">
                             {
-                                cartList?.map(element => <CartItem key={element.id} {...element}/>)
+                                loadedCartItems
+                                    ?
+                                    cartList?.map(element => <CartItem key={element.id} {...element}/>)
+                                    :
+                                    <>
+                                        <ProductCartLoader/>
+                                        <ProductCartLoader/>
+                                        <ProductCartLoader/>
+                                    </>
                             }
                         </div>
                     </div>

@@ -8,10 +8,12 @@ import {
 import CartService from "../../API/CartService";
 import FavoriteService from "../../API/FavoriteService";
 import {isOpen, openModalNotAuth} from "../../store/Reducers/moladReducer";
+import {ProductPriceLoader} from "../SkeletonLoader/ProductPriceLoader";
 
 const CatalogItem = (props) => {
     const dispatch = useDispatch();
     const userEmail = useSelector((state) => state.user.userEmail);
+    const updatePrice = useSelector((state) => state.products.updatePrice);
 
     async function addToCart() {
         if (userEmail) {
@@ -36,7 +38,11 @@ const CatalogItem = (props) => {
                  height={160}
             />
             <div className="catalog-item__price">
-                {props.price} ₽
+                {
+                    updatePrice
+                        ? <ProductPriceLoader />
+                        : `${props.price} ₽`
+                }
             </div>
             <div className="catalog-item__title">
                 {props.title}

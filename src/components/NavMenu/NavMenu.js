@@ -9,16 +9,27 @@ import {
 } from "../../store/Reducers/moladReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MenuNumberLoader} from "../SkeletonLoader/MenuCartLoader";
+import CartService from "../../API/CartService";
+import {appendProductsFromDataBase} from "../../store/Reducers/cartReducer";
 
 function NavMenu(props) {
     const dispatch = useDispatch();
     const totalCostCart = useSelector((state) => state.cart.totalCostCart);
     const countFavoriteItems = useSelector((state) => state.cart.countFavoriteItems);
+    const loadedCartItems = useSelector((state) => state.cart.loadedCartItems);
     const userEmail = useSelector((state) => state.user.userEmail);
 
     const openModalWindowCart = () => {
         dispatch(openModalCart(true));
         dispatch(isOpen(true));
+        !loadedCartItems && fetchCartProducts();
+    }
+
+    async function fetchCartProducts() {
+        const response = await CartService.getAllProductsCart();
+        if (response) {
+            dispatch(appendProductsFromDataBase(response.data['shop_items']));
+        }
     }
 
     const openModalWindowFavorite = () => {
