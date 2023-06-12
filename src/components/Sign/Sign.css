@@ -18,6 +18,11 @@
   border-image: initial;
   background: rgb(251, 236, 242);
 }
+@media screen and (max-width: 860px) {
+  .sign-form {
+    width: 100%;
+  }
+}
 
 .sign-form__input-wrapper {
   margin-bottom: 1rem;
@@ -40,6 +45,11 @@
 }
 .sign-form__submit-button:hover {
   background-color: #d4ceff;
+}
+@media screen and (max-width: 475px) {
+  .sign-form__submit-button {
+    width: 100%;
+  }
 }
 
 .sign-form__more-action {

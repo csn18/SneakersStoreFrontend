@@ -87,13 +87,6 @@ function App() {
         }
     }
 
-    // async function fetchFavoritesProducts() {
-    //     const response = await FavoriteService.getProductFavorite();
-    //     if (response) {
-    //         dispatch(appendFavoritesFromDataBase(response.data['shop_items']));
-    //     }
-    // }
-
     return (
         <div className="App">
             <NavMenu/>

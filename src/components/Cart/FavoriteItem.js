@@ -17,11 +17,10 @@ function FavoriteItem(props) {
         dispatch(addProductToCartFavorite(props));
     }
 
-
     return (
         <div className='favorite-item'>
             <div className="cart-item__image">
-                <img src={props.images[0].image} width={90} height={90} alt=""/>
+                <img src={props.images && props.images[0].image} width={90} height={90} alt=""/>
             </div>
             <div className="cart-item__title">
                 {props.title}

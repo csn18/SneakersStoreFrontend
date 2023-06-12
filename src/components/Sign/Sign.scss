@@ -19,6 +19,10 @@
       background: rgb(251, 236, 242);
     }
   }
+
+  @media screen and (max-width: 860px) {
+      width: 100%;
+  }
 }
 
 .sign-form__input-wrapper {
@@ -43,6 +47,10 @@
 
   &:hover {
     background-color: #d4ceff;
+  }
+
+  @media screen and (max-width: 475px) {
+      width: 100%;
   }
 }
 

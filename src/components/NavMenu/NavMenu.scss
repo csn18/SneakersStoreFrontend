@@ -7,6 +7,10 @@
 .nav-container {
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 640px) {
+    flex-direction: column;
+  }
 }
 
 .nav-menu-links {
@@ -21,9 +25,9 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: .8rem;
-  border-radius: .5rem;
-  transition: all .3s ease-in-out;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
   margin-left: 1rem;
   display: flex;
   align-items: center;
@@ -47,6 +51,16 @@
 
 .nav-menu-auth {
   display: flex;
+
+  @media screen and (max-width: 640px) {
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 575px) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .nav-link__cart-count-favorite {
@@ -59,9 +73,9 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: .8rem;
-  border-radius: .5rem;
-  transition: all .3s ease-in-out;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
   margin-left: 1rem;
   display: flex;
   align-items: center;
@@ -71,4 +85,12 @@
   &:hover {
     background-color: #f1f1f1;
   }
+
+  @media screen and (max-width: 475px) {
+    padding: 0.5rem;
+  }
+}
+
+.nav-menu-actions {
+  display: flex;
 }

@@ -33,6 +33,5 @@ export const ModalNotAuth = () => {
                 </div>
             </div>
         </div>
-
     );
 }

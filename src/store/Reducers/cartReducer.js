@@ -1,5 +1,6 @@
 const defaultState = {
     loadedCartItems: false,
+    loadedFavoriteItems: false,
     favoriteItems: [],
     cartItems: [],
     totalCostCart: null,
@@ -24,6 +25,8 @@ export const cartReducer = (state = defaultState, action) => {
                 ...state,
                 totalCostCart: Number(action.payload['totalCostCart']),
                 countFavoriteItems: action.payload['countFavoriteItems'],
+                cartItems: [...action.payload['cartItemsId']],
+                favoriteItems: [...action.payload['favoriteItemsId']],
             }
         case APPEND_PRODUCTS_DB:
             let totalPrice = 0;
@@ -44,7 +47,7 @@ export const cartReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 countFavoriteItems: action.payload.length,
-                favoriteItems: [...state.favoriteItems, ...action.payload]
+                favoriteItems: [...action.payload]
             }
         case ADD_PRODUCT_TO_FAVORITE:
             return {
@@ -75,7 +78,6 @@ export const cartReducer = (state = defaultState, action) => {
                 totalCostCart: state.totalCostCart + Number(action.payload.price)
             }
         case UPDATE_CART:
-            console.log(action.payload)
             let totalCostCart = 0;
             [...action.payload.cart['shop_items']].forEach((item) => totalCostCart += Number(item.price))
             return {
