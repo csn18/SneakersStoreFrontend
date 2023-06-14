@@ -13,6 +13,7 @@ const UPDATE_PRODUCT_PRICE = 'UPDATE_PRODUCT_PRICE';
 const UPDATE_PRODUCT_PRICE_STATUS = 'UPDATE_PRODUCT_PRICE_STATUS';
 const INCREMENT_CURRENT_PAGE = 'INCREMENT_CURRENT_PAGE';
 const CHANGE_PRODUCT_LOADED = 'CHANGE_PRODUCT_LOADED';
+const SAVE_FILTERED_ITEMS = 'SAVE_FILTERED_ITEMS';
 
 export const shopItemsReducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -20,20 +21,26 @@ export const shopItemsReducer = (state = defaultState, action) => {
             if (state.productList.length > 0) {
                 return {
                     ...state,
-                    productList: [...state.productList, ...action.payload.results],
+                    totalCountProducts: action.payload.count,
+                    productList: [...action.payload.results],
                     isProductsLoading: false,
+                    totalCountPage: Math.ceil(action.payload.count / action.payload.results.length),
+                    countProductsPerPage: action.payload.results.length
                 }
             } else {
                 return {
                     ...state,
                     totalCountProducts: action.payload.count,
-                    countProductsPerPage: action.payload.results.length,
-                    totalCountPage: Math.ceil(action.payload.count / action.payload.results.length),
                     productList: [...state.productList, ...action.payload.results],
                     isProductsLoading: false,
                 }
             }
-
+        case SAVE_FILTERED_ITEMS:
+            return {
+                ...state,
+                productList: [...action.payload['results']],
+                isProductsLoading: false,
+            }
         case UPDATE_PRODUCT_PRICE_STATUS:
             return {
                 ...state,
@@ -71,6 +78,7 @@ export const shopItemsReducer = (state = defaultState, action) => {
 export const saveAllProductsAction = (payload) => ({type: 'SAVE_ALL_PRODUCTS', payload});
 export const updatePriceProductsAction = (payload) => ({type: 'UPDATE_PRODUCT_PRICE', payload});
 export const updatePriceProductsStatusAction = (payload) => ({type: 'UPDATE_PRODUCT_PRICE_STATUS', payload});
+export const saveFilteredItems = (payload) => ({type: 'SAVE_FILTERED_ITEMS', payload});
 export const incrementCurrentPage = (payload) => ({
     type: 'INCREMENT_CURRENT_PAGE', payload
 });

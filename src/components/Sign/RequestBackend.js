@@ -77,7 +77,7 @@ export const refreshAccessToken = (token, userData) => {
     fetch(url, options)
         .then((response) => response.json())
         .then((data) => {
-            if (data.code === 'token_not_valid') {
+            if (data.code === 'token_not_valid' && userData) {
                 return getAccessToken(userData.username, userData.password)
             }
             if (data.access) {

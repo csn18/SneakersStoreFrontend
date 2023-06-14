@@ -1,0 +1,21 @@
+.filter-field {
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
+
+  & input {
+    margin-right: 1rem;
+  }
+}
+
+.filter-block {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-right: 2rem;
+  box-shadow: 0 3px 20px -10px rgba(0, 0, 0, 0.3);
+}
+
+.filter-field__wrapper {
+  padding: .2rem;
+}

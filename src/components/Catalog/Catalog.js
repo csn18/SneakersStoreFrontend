@@ -9,6 +9,8 @@ import {
     saveAllProductsAction
 } from "../../store/Reducers/shopItemsReducer";
 import {CardLoader} from "../SkeletonLoader/CardListLoader";
+import Filters from "../Filters/Filters";
+import {FiltersLoader} from "../SkeletonLoader/FiltersLoader";
 
 function Catalog(props) {
     const lastElementRef = useRef();
@@ -48,22 +50,46 @@ function Catalog(props) {
         <div className='catalog'>
             {
                 <div className="container catalog-container">
-                    <h2>Главная страница</h2>
                     {
                         isProductsLoading && !productList.length > 0
                             ?
-                            <div className='catalog-list__loader'>
-                                <CardLoader/>
-                                <CardLoader/>
-                                <CardLoader/>
-                                <CardLoader/>
-                                <CardLoader/>
+                            <div className='catalog-loader'>
+                                <div>
+                                    <div>
+                                        <h2>Фильтры</h2>
+                                    </div>
+                                    <div className='catalog-filter__loader'>
+                                        <FiltersLoader/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <h2>Список товаров</h2>
+                                    </div>
+                                    <div className='catalog-list__loader'>
+                                        <CardLoader/>
+                                        <CardLoader/>
+                                        <CardLoader/>
+                                        <CardLoader/>
+                                    </div>
+                                </div>
                             </div>
                             :
-                            <div className="catalog-list">
-                                {
-                                    productList?.map(element => <CatalogItem key={element.id} {...element} />)
-                                }
+                            <div className='catalog-wrapper'>
+                                <div className='catalog-filters'>
+                                    <h2>Фильтры</h2>
+                                    <div>
+                                        <Filters/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2>Список товаров</h2>
+                                    <div className='catalog-list'>
+                                        {
+                                            productList?.map(element => <CatalogItem key={element.id} {...element} />)
+                                        }
+                                    </div>
+                                </div>
                             </div>
                     }
                     {
@@ -81,7 +107,8 @@ function Catalog(props) {
                 </div>
             }
         </div>
-    );
+    )
+        ;
 }
 
 export default Catalog;
