@@ -1,6 +1,11 @@
 import './Filters.css'
 import React, {useRef} from 'react';
-import {removeSelectedFilters, saveSelectedFilters} from "../../store/Reducers/filtersReducer";
+import {
+    removeSelectedBrandFilters,
+    saveSelectedBrandFilters,
+    saveSelectedSizeFilters,
+    removeSelectedSizeFilters
+} from "../../store/Reducers/filtersReducer";
 import {useDispatch} from "react-redux";
 
 function Filter(props) {
@@ -8,23 +13,31 @@ function Filter(props) {
     const inputRef = useRef();
 
     const changeFilter = () => {
-        if (inputRef.current['checked']) {
-            dispatch(saveSelectedFilters(inputRef.current['value']));
-        } else {
-            dispatch(removeSelectedFilters(inputRef.current['value']));
+        if (props.filterType === 'brand') {
+            if (inputRef.current['checked']) {
+                dispatch(saveSelectedBrandFilters(inputRef.current['value']));
+            } else {
+                dispatch(removeSelectedBrandFilters(inputRef.current['value']));
+            }
+        } else if (props.filterType === 'size') {
+            if (inputRef.current['checked']) {
+                dispatch(saveSelectedSizeFilters(inputRef.current['value']));
+            } else {
+                dispatch(removeSelectedSizeFilters(inputRef.current['value']));
+            }
         }
+
     };
 
     return (
         <div className='filter-field__wrapper'>
-            <label className='filter-field' htmlFor={props.filter.id}>
+            <label className='filter-field'>
                 <input ref={inputRef}
                        onChange={changeFilter}
                        type="checkbox"
-                       id={props.filter.id}
                        value={props.filter.id}
                 />
-                {props.filter.brand_name}
+                {props.filterText}
             </label>
         </div>
     );

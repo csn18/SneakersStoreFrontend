@@ -17,6 +17,7 @@ function Catalog(props) {
     const observerRef = useRef();
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.products.productList);
+    const filterRequestLoading = useSelector((state) => state.products.filterRequestLoading);
     const isProductsLoading = useSelector((state) => state.products.isProductsLoading);
     let currentPage = useSelector((state) => state.products.currentPage);
     let totalCountPage = useSelector((state) => state.products.totalCountPage);
@@ -51,7 +52,7 @@ function Catalog(props) {
             {
                 <div className="container catalog-container">
                     {
-                        isProductsLoading && !productList.length > 0
+                        (isProductsLoading && !productList.length > 0) || filterRequestLoading
                             ?
                             <div className='catalog-loader'>
                                 <div>

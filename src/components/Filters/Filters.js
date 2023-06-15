@@ -4,50 +4,77 @@ import {useDispatch, useSelector} from "react-redux";
 import Filter from "./Filter";
 import FilterService from "../../API/FilterService";
 import {setAllFilters} from "../../store/Reducers/filtersReducer";
-import {saveAllProductsAction} from "../../store/Reducers/shopItemsReducer";
+import {
+    changeFilterRequestLoading,
+    saveAllProductsAction
+} from "../../store/Reducers/shopItemsReducer";
 
 function Filters(props) {
     const dispatch = useDispatch();
     const filtersBrand = useSelector((state) => state.filter.allBrands);
+    const filtersSizes = useSelector((state) => state.filter.allSizes);
     const currentPage = useSelector((state) => state.products.currentPage);
-    const selectedFilters = useSelector((state) => state.filter.selectedFilters);
+    const selectedBrandFilters = useSelector((state) => state.filter.selectedBrandFilters);
+    const selectedSizesFilters = useSelector((state) => state.filter.selectedSizesFilters);
 
     useEffect(() => {
         setTimeout(() => {
-            getItemsFilter().then(response => null);
-        }, 1500);
-    }, [currentPage, dispatch, selectedFilters])
+            getItemsFilter();
+        }, 1500)
+    }, [dispatch, currentPage, selectedBrandFilters, selectedSizesFilters])
 
     useEffect(() => {
         setTimeout(() => {
-            getAllFilters().then(response => null);
+            getAllFilters();
         }, 1500);
-    }, []);
+    }, [dispatch]);
 
-    async function getAllFilters() {
+    async function getAllFilters(): void {
         const response = await FilterService.getAllFilters();
         if (response) {
-            dispatch(setAllFilters(response.data['brands']));
+            dispatch(setAllFilters(response.data));
         }
     }
 
-    async function getItemsFilter() {
+    async function getItemsFilter(): void {
         let params = `?page=${currentPage}`;
-        if (selectedFilters.length > 0) {
-            params += `&brand=${selectedFilters}`;
+        if (selectedBrandFilters.length > 0) {
+            params += `&brand=${selectedBrandFilters}`;
+        }
+
+        if (selectedSizesFilters.length > 0) {
+            params += `&sizes=${selectedSizesFilters}`;
         }
 
         const response = await FilterService.getItemsFilter(params);
         if (response) {
             dispatch(saveAllProductsAction(response.data));
+            dispatch(changeFilterRequestLoading(false));
         }
     }
 
     return (
-        <div className='filter-block'>
-            {
-                filtersBrand?.map(filter => <Filter key={filter.id} filter={filter}/>)
-            }
+        <div>
+            <div className='filter-block'>
+                <p>Бренды</p>
+                {
+                    filtersBrand?.map(filter => <Filter key={filter.id}
+                                                        filter={filter}
+                                                        filterText={filter.brand_name}
+                                                        filterType='brand'
+                    />)
+                }
+            </div>
+            <div className='filter-block'>
+                <p>Размер</p>
+                {
+                    filtersSizes?.map(filter => <Filter key={filter.id}
+                                                        filter={filter}
+                                                        filterText={filter.size}
+                                                        filterType='size'
+                    />)
+                }
+            </div>
         </div>
     );
 }
