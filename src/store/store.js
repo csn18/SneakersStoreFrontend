@@ -3,6 +3,7 @@ import {applyMiddleware, combineReducers} from 'redux'
 import {composeWithDevTools} from "@redux-devtools/extension";
 import thunk from 'redux-thunk';
 import {filtersReducer} from "./Reducers/filtersReducer";
+import {globalReducer} from "./Reducers/globalReducer";
 
 const {shopItemsReducer} = require("./Reducers/shopItemsReducer");
 const {cartReducer} = require("./Reducers/cartReducer");
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     'products': shopItemsReducer,
     'cart': cartReducer,
     'user': userReducer,
-    'filter': filtersReducer
+    'filter': filtersReducer,
+    'global': globalReducer,
 })
 
 export const store = configureStore(

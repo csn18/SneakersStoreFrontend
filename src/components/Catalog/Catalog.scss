@@ -184,5 +184,6 @@
 .catalog-wrapper {
   display: grid;
   grid-template-columns: 1fr 5fr;
+  grid-column-gap: 2rem;
   text-align: left;
 }

@@ -9,18 +9,33 @@
 }
 
 .filter-block {
+  width: 100%;
   background-color: white;
   border-radius: 1rem;
-  padding: 1rem 1rem 1rem 0;
-  margin-right: 2rem;
+  padding: 1rem;
   margin-bottom: 1rem;
 
   & p {
     font-weight: 800;
     margin-bottom: 0.5rem;
   }
+
+  &.price-block p {
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+  }
 }
 
-.filter-field__wrapper {
-  padding: .2rem;
+.filter-price__input-wrapper {
+  justify-content: space-between;
+}
+
+.min-max__price-input {
+  width: 45%;
+}
+
+.filter-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

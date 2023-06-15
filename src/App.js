@@ -14,6 +14,7 @@ import {useDispatch} from "react-redux";
 import UserService from "./API/UserService";
 import {setEmail, setFirstName} from "./store/Reducers/userReducer";
 import {updatePriceProductsAction, updatePriceProductsStatusAction} from "./store/Reducers/shopItemsReducer";
+import {saveMinMaxPrice} from "./store/Reducers/filtersReducer";
 
 function App() {
     const dispatch = useDispatch();
@@ -75,7 +76,7 @@ function App() {
     async function fetchFirstLoad() {
         const response = await CartService.firstLoad();
         if (response) {
-            dispatch(saveDataFirstLoad(response.data))
+            dispatch(saveDataFirstLoad(response.data));
         }
     }
 

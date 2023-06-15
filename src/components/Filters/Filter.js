@@ -7,38 +7,38 @@ import {
     removeSelectedSizeFilters
 } from "../../store/Reducers/filtersReducer";
 import {useDispatch} from "react-redux";
+import {Checkbox, FormControlLabel} from "@mui/material";
 
 function Filter(props) {
     const dispatch = useDispatch();
     const inputRef = useRef();
 
-    const changeFilter = () => {
+    const changeFilter = (event) => {
         if (props.filterType === 'brand') {
-            if (inputRef.current['checked']) {
-                dispatch(saveSelectedBrandFilters(inputRef.current['value']));
+            if (event.target['checked']) {
+                dispatch(saveSelectedBrandFilters(event.target.value));
             } else {
-                dispatch(removeSelectedBrandFilters(inputRef.current['value']));
+                dispatch(removeSelectedBrandFilters(event.target.value));
             }
         } else if (props.filterType === 'size') {
-            if (inputRef.current['checked']) {
-                dispatch(saveSelectedSizeFilters(inputRef.current['value']));
+            if (event.target['checked']) {
+                dispatch(saveSelectedSizeFilters(event.target.value));
             } else {
-                dispatch(removeSelectedSizeFilters(inputRef.current['value']));
+                dispatch(removeSelectedSizeFilters(event.target.value));
             }
         }
 
     };
 
     return (
-        <div className='filter-field__wrapper'>
-            <label className='filter-field'>
-                <input ref={inputRef}
-                       onChange={changeFilter}
-                       type="checkbox"
-                       value={props.filter.id}
+        <div>
+            <FormControlLabel control={
+                <Checkbox value={props.filter.id}
+                          onChange={changeFilter}
+                          ref={inputRef}
+                          size="small"
                 />
-                {props.filterText}
-            </label>
+            } label={props.filterText}/>
         </div>
     );
 }

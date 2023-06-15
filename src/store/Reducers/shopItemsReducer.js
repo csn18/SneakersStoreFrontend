@@ -25,8 +25,6 @@ export const shopItemsReducer = (state = defaultState, action) => {
                     ...state,
                     totalCountProducts: action.payload.count,
                     productList: [...action.payload.results],
-                    isProductsLoading: false,
-                    filterRequestLoading: false,
                     totalCountPage: Math.ceil(action.payload.count / action.payload.results.length),
                     countProductsPerPage: action.payload.results.length,
                 }
@@ -35,8 +33,6 @@ export const shopItemsReducer = (state = defaultState, action) => {
                     ...state,
                     totalCountProducts: action.payload.count,
                     productList: [...state.productList, ...action.payload.results],
-                    isProductsLoading: false,
-                    filterRequestLoading: false,
                 }
             }
         case CHANGE_FILTER_REQUEST_LOADING:
@@ -48,8 +44,6 @@ export const shopItemsReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 productList: [...action.payload['results']],
-                isProductsLoading: false,
-                filterRequestLoading: false
             }
         case UPDATE_PRODUCT_PRICE_STATUS:
             return {
