@@ -148,7 +148,6 @@ function Filters(props) {
                                 <Slider orientation="horizontal"
                                         disableSwap={true}
                                         defaultValue={[Number(minPrice), Number(maxPrice)]}
-                                        value={[Number(minPrice), Number(maxPrice)]}
                                         valueLabelDisplay="auto"
                                         min={Number(minPrice)}
                                         max={Number(maxPrice)}
