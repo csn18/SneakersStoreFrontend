@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {setEmail, setFirstName} from "../../store/Reducers/userReducer";
@@ -25,14 +25,13 @@ function ModalAccount(props) {
         const data = getValues();
         axios.put('http://localhost:8000/api/user/profile/', data, {
             headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
+        }).then((response) => {
+            if (response.status === 200) {
+                dispatch(closeModal(true));
+            } else {
+                console.log(response);
+            }
         })
-            .then((response) => {
-                if (response.status === 200) {
-                    dispatch(closeModal(true));
-                } else {
-                    console.log(response)
-                }
-            })
     };
 
     return (
@@ -40,7 +39,8 @@ function ModalAccount(props) {
             <h1 className='modal-header'>Профиль</h1>
             {
                 userEmail
-                    ? <form onSubmit={handleSubmit(onSubmit)} className='sign-form'>
+                    ?
+                    <form onSubmit={handleSubmit(onSubmit)} className='sign-form'>
                         <div className='sign-form__input-wrapper'>
                             <input type="text"
                                    name='email'
@@ -62,7 +62,8 @@ function ModalAccount(props) {
 
                         <input className='sign-form__submit-button' type="submit" value='Сохранить'/>
                     </form>
-                    : <form action=""></form>
+                    :
+                    <form action=""></form>
             }
         </div>
     );

@@ -20,7 +20,6 @@
 
 .model-content {
   width: 50rem;
-  min-height: 60vh;
   border-radius: 1rem;
   background-color: white;
   position: fixed;
@@ -114,6 +113,10 @@
 .item-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
+}
+
+.cart-create__order {
+  margin-top: 2rem;
 }
 
 /*# sourceMappingURL=Modal.css.map */

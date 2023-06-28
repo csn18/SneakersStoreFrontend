@@ -2,10 +2,9 @@
   display: flex;
   justify-content: flex-start;
   cursor: pointer;
-
-  & input {
-    margin-right: 1rem;
-  }
+}
+.filter-field input {
+  margin-right: 1rem;
 }
 
 .filter-block {
@@ -14,16 +13,14 @@
   border-radius: 1rem;
   padding: 1rem;
   margin-bottom: 1rem;
-
-  & p {
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-  }
-
-  &.price-block p {
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-  }
+}
+.filter-block p {
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.filter-block.price-block p {
+  font-weight: 800;
+  margin-bottom: 1.5rem;
 }
 
 .filter-price__input-wrapper {
@@ -38,8 +35,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-  @media screen and (max-width: 860px) {
+}
+@media screen and (max-width: 860px) {
+  .filter-wrapper {
     margin-bottom: 2rem;
   }
 }
+
+/*# sourceMappingURL=Filters.css.map */

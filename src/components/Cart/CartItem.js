@@ -3,6 +3,8 @@ import './Cart.css'
 import {removeProductFromCart} from "../../store/Reducers/cartReducer";
 import {useDispatch} from "react-redux";
 import CartService from '../../API/CartService'
+import Button from "@mui/material/Button";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function CartItem(props) {
     const dispatch = useDispatch();
@@ -24,14 +26,9 @@ function CartItem(props) {
                 {props.price} ₽
             </div>
             <div className="cart-item__remove">
-                <button className='remove-item__btn' onClick={removeCartElement}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         strokeWidth={1.5}
-                         stroke="currentColor" className="w-6 h-6" width={24} height={24}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
+                <Button variant="outlined" onClick={removeCartElement} color='error' startIcon={<DeleteIcon/>}>
                     Удалить
-                </button>
+                </Button>
             </div>
         </div>
     );

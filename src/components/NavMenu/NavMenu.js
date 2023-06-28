@@ -3,14 +3,17 @@ import './NavMenu.css'
 import {
     isOpen,
     openModalCart,
-    openModalFavorite, openModalProfile,
+    openModalFavorite, openModalNotAuth, openModalProfile,
     openModalSignIn,
     openModalSignUp
 } from "../../store/Reducers/moladReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {MenuNumberLoader} from "../SkeletonLoader/MenuCartLoader";
 import CartService from "../../API/CartService";
-import {appendFavoritesFromDataBase, appendProductsFromDataBase} from "../../store/Reducers/cartReducer";
+import {
+    appendFavoritesFromDataBase,
+    appendProductsFromDataBase
+} from "../../store/Reducers/cartReducer";
 import FavoriteService from "../../API/FavoriteService";
 
 function NavMenu(props) {
@@ -22,9 +25,14 @@ function NavMenu(props) {
     const userEmail = useSelector((state) => state.user.userEmail);
 
     const openModalWindowCart = () => {
-        dispatch(openModalCart(true));
-        dispatch(isOpen(true));
-        !loadedCartItems && fetchCartProducts();
+        if (userEmail) {
+            dispatch(openModalCart(true));
+            dispatch(isOpen(true));
+            !loadedCartItems && fetchCartProducts();
+        } else {
+            dispatch(openModalNotAuth(true));
+            dispatch(isOpen(true));
+        }
     }
 
     async function fetchCartProducts() {
@@ -34,18 +42,23 @@ function NavMenu(props) {
         }
     }
 
-    function fetchFavoritesProducts() {
-        const response = FavoriteService.getProductFavorite();
+    async function fetchFavoritesProducts() {
+        const response = await FavoriteService.getProductFavorite();
         if (response) {
             dispatch(appendFavoritesFromDataBase(response.data['shop_items']));
         }
-        return response
+        return response;
     }
 
     const openModalWindowFavorite = () => {
-        dispatch(openModalFavorite(true));
-        dispatch(isOpen(true));
-        !loadedFavoriteItems && fetchFavoritesProducts();
+        if (userEmail) {
+            dispatch(openModalFavorite(true));
+            dispatch(isOpen(true));
+            !loadedFavoriteItems && fetchFavoritesProducts();
+        } else {
+            dispatch(openModalNotAuth(true));
+            dispatch(isOpen(true));
+        }
     }
 
     const openModalWindowSignIn = () => {

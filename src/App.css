@@ -22,12 +22,6 @@ body {
 
 @media screen and (max-width: 1450px) {
     .container {
-        width: 70rem;
-    }
-}
-
-@media screen and (max-width: 1366px) {
-    .container {
         width: 100%;
     }
 }
